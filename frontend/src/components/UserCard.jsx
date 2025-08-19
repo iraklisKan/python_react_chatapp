@@ -11,14 +11,45 @@ import {
 } from "@chakra-ui/react";
 import { BiTrash, BiEditAlt } from "react-icons/bi";
 import EditModal from "./EditModal.jsx";
+import { BASE_URL } from "../App.jsx";
+import { useToast } from "@chakra-ui/react";
 
-function UserCard({ user }) {
+function UserCard({ user,setUsers }) {
+    const toast = useToast();
+    const handleDeleteUser = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/friends/${user.id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error(data.error);
+      }
+      setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
+      toast({
+        title: "User Deleted",
+        description: "Your friend has been removed successfully!",
+        status: "success",
+        duration: 2000,
+        position: "top-center",
+      });
+      
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 2000,
+        position: "top-center",
+      });
+    }
+  };
+
   return (
     <Card>
       <CardHeader>
         <Flex gap={4}>
           <Flex flex={"1"} gap={"4"} alignItems={"center"}>
-            <Avatar src="https://avatar.iran.liara.run/public" />
+            <Avatar src={user.imgUrl}/>
             <Box>
               <Heading size="sm">{user.name}</Heading>
               <Text>{user.role}</Text>
@@ -32,6 +63,9 @@ function UserCard({ user }) {
               size={"sm"}
               aria-label="Delete user"
               icon={<BiTrash size={20} />}
+                onClick={handleDeleteUser}
+                    // Handle delete user logic here
+                
             />
           </Flex>
         </Flex>

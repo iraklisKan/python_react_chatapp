@@ -4,7 +4,7 @@ import { LuSun } from "react-icons/lu";
 import CreateUserModal from "./CreateUserModal.jsx";
 import React from "react";
 
-const Nvabar = () => {
+const Nvabar = ({ setUsers }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
    <Container maxW={"900px"}>
@@ -41,7 +41,7 @@ const Nvabar = () => {
             <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <IoMoon /> : <LuSun size={20} />}
             </Button>
-            <CreateUserModal />
+            <CreateUserModal setUsers={setUsers} />
           </Flex>
             </Flex>
        </Box>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python React Chat App
 
 A full-stack chat application built with Python Flask backend and React frontend.
@@ -58,3 +59,6 @@ chatapp_py_react/
 - Database files are automatically created
 - Debug mode is enabled for development
 - Auto-reload is enabled when files change
+=======
+# python_react_chatapp
+>>>>>>> ca1d01a46768bdb5d1f7919870241787d0591873

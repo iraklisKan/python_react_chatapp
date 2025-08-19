@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { Text, Container, Stack } from "@chakra-ui/react";
 import Nvarbar from "./components/Nvabar.jsx";
 import UserGrid from "./components/UserGrid.jsx";
 
+export const BASE_URL = "http://localhost:5000/api";
 function App() {
+  const [users, setUsers] = useState([]);
   return (
     <Stack minH={"100vh"}>
-      <Nvarbar />
+      <Nvarbar setUsers={setUsers} />
       <Container maxW={"1200px"} my={4}>
         <Text
           fontSize={{ base: "3xl", md: "50" }}
@@ -21,7 +24,7 @@ function App() {
            </Text>
           🚀
         </Text>
-        <UserGrid></UserGrid>
+        <UserGrid users={users} setUsers={setUsers} />
       </Container>
     </Stack>
   );
