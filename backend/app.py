@@ -33,13 +33,13 @@ def serve_react_routes(path):
     else:
         return send_from_directory(app.static_folder, 'index.html')
 
-# Import models and routes (MUST be outside if __name__ == "__main__" for Gunicorn)
-from models import Friend
-from routes import *
-
-# Create database tables
-with app.app_context():
-    db.create_all()
-
 if __name__ == "__main__":
+    # Import models and routes after app setup
+    from models import Friend
+    from routes import *
+    
+    # Create database tables
+    with app.app_context():
+        db.create_all()
+    
     app.run(debug=True)
