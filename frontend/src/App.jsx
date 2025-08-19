@@ -3,7 +3,8 @@ import { Text, Container, Stack } from "@chakra-ui/react";
 import Nvarbar from "./components/Nvabar.jsx";
 import UserGrid from "./components/UserGrid.jsx";
 
-export const BASE_URL = "http://127.0.0.1:5000/api";
+// Use relative URL for deployment (works with same-port setup)
+export const BASE_URL = "/api";
 function App() {
   const [users, setUsers] = useState([]);
   return (
