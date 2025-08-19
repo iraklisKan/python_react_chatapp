@@ -22,7 +22,8 @@ function UserCard({ user,setUsers }) {
         method: "DELETE",
       });
       if (!response.ok) {
-        throw new Error(data.error);
+        const data = await response.json();
+        throw new Error(data.error || "Failed to delete user");
       }
       setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
       toast({
@@ -56,7 +57,7 @@ function UserCard({ user,setUsers }) {
             </Box>
           </Flex>
           <Flex>
-            <EditModal user={user} />
+            <EditModal user={user} setUsers={setUsers}/>
             <IconButton
               variant="ghost"
               colorScheme="red"
