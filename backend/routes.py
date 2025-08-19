@@ -3,21 +3,6 @@ from flask import request, jsonify
 from models import Friend
 
 
-# Debug route to see all registered routes
-@app.route("/api/debug/routes", methods=["GET"])
-def debug_routes():
-    routes = []
-    for rule in app.url_map.iter_rules():
-        routes.append(
-            {
-                "endpoint": rule.endpoint,
-                "methods": list(rule.methods),
-                "rule": str(rule),
-            }
-        )
-    return jsonify(routes)
-
-
 # Get all friends
 @app.route("/api/friends", methods=["GET"])
 def get_friends():
@@ -86,7 +71,7 @@ def delete_friend(id):
 
 
 # Update a friend
-@app.route("/api/friends/update/<int:id>", methods=["PUT", "PATCH"])
+@app.route("/api/friends/update/<int:id>", methods=["PUT"])
 def update_friend(id):
     try:
         friend = Friend.query.get(id)

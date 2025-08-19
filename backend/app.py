@@ -12,12 +12,13 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-# Create database tables
-with app.app_context():
-    db.create_all()
-
-# Import routes AFTER app and db are set up to avoid circular imports
-from routes import *
-
 if __name__ == "__main__":
+    # Import models and routes after app setup
+    from models import Friend
+    from routes import *
+    
+    # Create database tables
+    with app.app_context():
+        db.create_all()
+    
     app.run(debug=True)
